@@ -1,33 +1,88 @@
-# Beacon MERN Stack App
+# Beacon Accessibility Scanner
 
-This project is a starter template for a MERN stack application (MongoDB, Express, React, Node.js).
+A modern, scalable MERN stack application for automated accessibility scanning, reporting, and analytics.
 
-## Project Structure
-
-- `/client` - React frontend
-- `/server` - Express backend API
-- `/README.md` - Project documentation
-- `/.github/copilot-instructions.md` - Copilot custom instructions
-- `/.vscode/tasks.json` - VS Code tasks
-
-## Getting Started
-
-1. Install dependencies for both client and server:
-   ```bash
-   cd client && npm install
-   cd ../server && npm install
-   ```
-2. Start the development servers:
-   - In `/client`: `npm start` (React app)
-   - In `/server`: `npm run dev` (Express API)
-
-3. Visit `http://localhost:3000` for the frontend and `http://localhost:5000/api` for the backend API.
+---
 
 ## Features
-- React frontend (Create React App)
-- Express backend API
-- MongoDB integration (Mongoose)
-- Docker support for local development
+- User authentication (JWT)
+- Website management (add/list)
+- Manual scan trigger for any website
+- Async scan processing with BullMQ, Redis, Puppeteer, and axe-core
+- Raw and structured accessibility results stored in MongoDB
+- Dashboard, scan history, and comparison UI (React + Tailwind)
+- Modular, production-ready backend and worker
+
+---
+
+## Prerequisites
+- Node.js 18+
+- Docker & Docker Compose
+- (Optional) Redis server (for BullMQ job queue)
+
+---
+
+## Quick Start
+
+### 1. Clone the repository
+```bash
+git clone https://github.com/shahamitr/beacon.git
+cd beacon/beacon
+```
+
+### 2. Install dependencies
+```bash
+./install.sh
+```
+This will install backend and frontend dependencies and start MongoDB, backend, and frontend using Docker Compose.
+
+### 3. Start Redis (for job queue)
+You can use Docker:
+```bash
+docker run -d --name redis -p 6379:6379 redis
+```
+Or install Redis locally.
+
+### 4. Seed demo data (optional)
+```bash
+node server/demo-data.js
+```
+
+### 5. Start the scan worker
+```bash
+node server/worker/scanWorker.mjs
+```
+
+### 6. Access the app
+- Frontend: http://localhost:3000
+- Backend API: http://localhost:5000/api
+
+---
+
+## Usage
+- Register/login in the web UI
+- Add websites to your dashboard
+- Trigger scans manually
+- View scan results, issues, and compare scans
+
+---
+
+## Development
+- Backend: `server/`
+- Frontend: `client/`
+- Worker: `server/worker/scanWorker.mjs`
+- Queue: `server/queue.js`
+
+---
+
+## Security & Best Practices
+- All secrets/config via environment variables
+- JWT authentication for all API routes
+- Async job queue for scalability
+- Error handling and logging (Winston)
+- Modular code structure
+
+---
 
 ## License
 MIT
