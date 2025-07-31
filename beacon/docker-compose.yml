@@ -1,0 +1,33 @@
+version: '3.8'
+services:
+  mongo:
+    image: mongo:6
+    restart: always
+    ports:
+      - '27017:27017'
+    volumes:
+      - mongo-data:/data/db
+  backend:
+    build: ./server
+    command: npm run dev
+    volumes:
+      - ./server:/usr/src/app
+    ports:
+      - '5000:5000'
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/beacon
+    depends_on:
+      - mongo
+  frontend:
+    build: ./client
+    command: npm start
+    volumes:
+      - ./client:/usr/src/app
+    ports:
+      - '3000:3000'
+    environment:
+      - REACT_APP_API_URL=http://localhost:5000/api
+    depends_on:
+      - backend
+volumes:
+  mongo-data:
