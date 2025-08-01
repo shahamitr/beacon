@@ -12,7 +12,7 @@ import express from 'express';
 import Scan from '../models/Scan.js';
 import Website from '../models/Website.js';
 import auth from '../middleware/auth.js';
-import { scanQueue } from '../queue.js';
+const { scanQueue } = require('../queue.js');
 const logger = require('../logger.js');
 
 const router = express.Router();

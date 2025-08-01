@@ -22,7 +22,10 @@ A modern, scalable MERN stack application for automated accessibility scanning, 
 
 ---
 
-## Quick Start
+
+## Local Development Setup
+
+Follow these steps to set up Beacon for local development:
 
 ### 1. Clone the repository
 ```bash
@@ -30,32 +33,38 @@ git clone https://github.com/shahamitr/beacon.git
 cd beacon/beacon
 ```
 
-### 2. Install dependencies
+### 2. Run the install script
 ```bash
 ./install.sh
 ```
-This will install backend and frontend dependencies and start MongoDB, backend, and frontend using Docker Compose.
+This script will:
+- Install backend and frontend dependencies
+- Start Redis (via Docker)
+- Start MongoDB, backend, and frontend (via Docker Compose)
+- Optionally seed demo data
+- Print instructions to start the scan worker
 
-### 3. Start Redis (for job queue)
-You can use Docker:
-```bash
-docker run -d --name redis -p 6379:6379 redis
-```
-Or install Redis locally.
-
-### 4. Seed demo data (optional)
-```bash
-node server/demo-data.js
-```
-
-### 5. Start the scan worker
+### 3. Start the scan worker (in a separate terminal)
 ```bash
 node server/worker/scanWorker.mjs
 ```
 
-### 6. Access the app
+### 4. Access the application
 - Frontend: http://localhost:3000
 - Backend API: http://localhost:5000/api
+
+### 5. Development workflow
+- Make code changes in `client/` (React frontend) or `server/` (Express backend)
+- Restart affected services if needed (use Docker Compose)
+- Use the scan worker for async accessibility scans
+
+### 6. Stopping services
+To stop all running containers:
+```bash
+docker compose down
+```
+
+---
 
 ---
 

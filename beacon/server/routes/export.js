@@ -4,7 +4,7 @@ import Website from '../models/Website.js';
 import auth from '../middleware/auth.js';
 import { Parser as Json2csvParser } from 'json2csv';
 import { createObjectCsvStringifier } from 'csv-writer';
-import logger from '../logger.js';
+const logger = require('../logger.js');
 import PDFDocument from 'pdfkit';
 
 const router = express.Router();
