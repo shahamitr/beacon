@@ -4,6 +4,7 @@ import Report from './Report';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
 
+function Scans({ websiteId }) {
   const { token } = useAuth();
   const [scans, setScans] = useState([]);
   const [error, setError] = useState('');
@@ -95,3 +96,6 @@ const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
       )}
     </div>
   );
+}
+
+export default Scans;
