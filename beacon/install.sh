@@ -15,7 +15,14 @@ else
 fi
 
 echo "[4/6] Starting Docker Compose (MongoDB, backend, frontend)..."
-docker compose up --build -d
+MODE=${1:-dev}
+if [ "$MODE" = "prod" ]; then
+  echo "[INFO] Using production mode (docker-compose.prod.yml)"
+  docker compose -f docker-compose.prod.yml up --build -d
+else
+  echo "[INFO] Using development mode (docker-compose.dev.yml)"
+  docker compose -f docker-compose.dev.yml up --build -d
+fi
 
 echo "[5/6] Seeding demo data (optional, can skip if not needed)..."
 if [ -f server/demo-data.js ]; then
