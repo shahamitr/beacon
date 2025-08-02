@@ -2,7 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import './queue.js';
-import logger from './logger.js';
+const logger = require('./logger.js');
 
 const app = express();
 app.use(cors());
